@@ -25,4 +25,3 @@ class SeedEncryption:
         cipher = AES.new(key, AES.MODE_CBC, iv)
         decrypted = cipher.decrypt(ciphertext)
         return self.unpad(decrypted)
-

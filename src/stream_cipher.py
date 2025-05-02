@@ -13,5 +13,6 @@ class StreamCipher:
     def run(self, n):
         plaintext = self.__plaintext[self.__index : self.__index + n]
         key = self.__keystream[self.__index : self.__index + n]
+        self.__index = self.__index + n
         return np.bitwise_xor(plaintext, key)
         
