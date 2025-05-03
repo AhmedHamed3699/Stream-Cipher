@@ -14,5 +14,5 @@ class KeyExchange:
     def compute_shared_secret_key(self, othre_public_key, my_private_key) -> int:
         return pow(othre_public_key, my_private_key, self.p)
     
-    def compare_shared_keys(key1, key2) -> bool:
+    def compare_shared_keys(self, key1, key2) -> bool:
         return key1 == key2
