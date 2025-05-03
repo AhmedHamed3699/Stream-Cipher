@@ -4,10 +4,10 @@ from LCG import LCG
 class StreamCipher:
     def __init__(self, input_file, seed=42, a=7, c=0, m=127):
         lcg = LCG(seed, a, c, m)
-        with open(input_file, 'r') as file:
+        with open(input_file, 'rb') as file:
             data = file.read()
         self.__plaintext = np.frombuffer(data, dtype=np.uint8)
-        self.__keystream = np.array(lcg.n_next(len(self.plaintext)))
+        self.__keystream = np.array(lcg.n_next(len(self.__plaintext)))
         self.__index = 0
     
     def run(self, n):
