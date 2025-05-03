@@ -1,5 +1,4 @@
 from Crypto.Cipher import AES
-from Crypto.Random import get_random_bytes
 
 class SeedEncryption:
     def __init__(self):
@@ -14,14 +13,11 @@ class SeedEncryption:
         return data[:-padding_len]
     
     def encrypt_seed(self, seed_bytes, key):
-        iv = get_random_bytes(16)
-        cipher = AES.new(key, AES.MODE_CBC, iv)
+        cipher = AES.new(key, AES.MODE_ECB)
         encrypted = cipher.encrypt(self.pad(seed_bytes))
-        return iv + encrypted
+        return encrypted
 
     def decrypt_seed(self, encrypted_data, key):
-        iv = encrypted_data[:16]
-        ciphertext = encrypted_data[16:]
-        cipher = AES.new(key, AES.MODE_CBC, iv)
-        decrypted = cipher.decrypt(ciphertext)
+        cipher = AES.new(key, AES.MODE_ECB)
+        decrypted = cipher.decrypt(encrypted_data)
         return self.unpad(decrypted)
